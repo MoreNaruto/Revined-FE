@@ -56,10 +56,14 @@ module.exports = (env) => {
                     }
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg)$/i,
+                    test: /\.(gif|png|jpe?g|svg)$/i,
                     use: [
+                        'file-loader',
                         {
-                            loader: 'file-loader',
+                            loader: 'image-webpack-loader',
+                            options: {
+                                disable: true
+                            },
                         },
                     ],
                 }
@@ -73,6 +77,7 @@ module.exports = (env) => {
             new HtmlWebpackPlugin({
                 template: path.resolve(__dirname, 'public/index.html'),
                 filename: "index.html",
+                favicon: "./public/icons/rackd.io.png"
             }),
             new CleanWebpackPlugin({cleanStaleWebpackAssets: false}),
             new MiniCssExtractPlugin(),
