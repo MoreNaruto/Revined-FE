@@ -7,6 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Home from './page/Home';
+import TermsOfService from './page/TermsOfService';
 import styled from "@emotion/styled";
 
 const NavBarTypography = styled(Typography)({
@@ -52,6 +53,7 @@ export default function App() {
                 <Layout/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
+                    <Route path="/terms-of-service" element={<TermsOfService/>}/>
                 </Routes>
             </Router>
         </div>
