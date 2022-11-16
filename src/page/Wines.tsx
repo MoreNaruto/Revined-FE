@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Home: React.FunctionComponent = () => (
+const Wines: React.FunctionComponent = () => (
     <div>
         <h2>HELLO</h2>
         <p>Cras facilisis urna ornare ex volutpat, et
@@ -14,4 +14,4 @@ const Home: React.FunctionComponent = () => (
     </div>
 );
 
-export default Home;
+export default Wines;
