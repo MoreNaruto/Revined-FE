@@ -21,7 +21,6 @@ export function post(path: string, data: any): AxiosPromise {
                 },
 
             };
-            console.log(JSON.stringify(config))
             return axios.post(`${baseApiUrl}${path}`, JSON.stringify(data), config);
         })
 }
