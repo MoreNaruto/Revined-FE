@@ -13,7 +13,7 @@ export function post(path: string, data: any, cookie: string): AxiosPromise {
     return axios.get(`${baseApiUrl}/csrf`, {
         headers: {
             'User-Rackd-Cookie': cookie,
-            'Access-Control-Allow-Origin': "http://localhost:8080 https://www.rackd.io https://re10shon-backend.herokuapp.com"
+            'Access-Control-Allow-Origin': "*"
         }
     })
         .then((tokenResp: AxiosResponse<CSRFTokenResponse>) => {
