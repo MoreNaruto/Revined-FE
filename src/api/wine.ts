@@ -19,6 +19,6 @@ export interface WineRequest {
     foodPairing: string[]
 }
 
-export async function addWine(req: WineRequest): Promise<any> {
-    return post("/wine/add", req)
+export async function addWine(req: WineRequest, cookie: string): Promise<any> {
+    return post("/wine/add", req, cookie)
 }

@@ -11,8 +11,8 @@ export interface LoginResponse {
     refreshToken: string
 }
 
-export async function loginUser(credentials: Credentials): Promise<LoginResponse> {
-  return post('/authenticate', credentials)
+export async function loginUser(credentials: Credentials, cookie: string): Promise<LoginResponse> {
+  return post('/authenticate', credentials, cookie)
     .then((res: AxiosResponse<LoginResponse>) => {
         return res.data
     });

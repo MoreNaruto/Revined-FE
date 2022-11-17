@@ -5,6 +5,7 @@ import {AxiosError} from "axios";
 import {FormControl, InputLabel, NativeSelect} from "@mui/material";
 import {addWine, WineRequest} from "../api/wine";
 import useToken from "../hook/useToken";
+import {useCookies} from "react-cookie";
 
 const Layout = styled.div`
   display: flex;
@@ -42,6 +43,7 @@ const MultipleWineWrapper = () => {
     const [isError, setError] = useState<boolean>(false);
     const [isSuccessful, setSuccessful] = useState<boolean>(false);
     const {token} = useToken();
+    const [cookies] = useCookies(['rackd-cookie-id']);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -64,7 +66,7 @@ const MultipleWineWrapper = () => {
             foodPairing: foodPairing ?? []
         };
 
-        await addWine(wineRequest)
+        await addWine(wineRequest, cookies["rackd-cookie-id"])
             .then(_ => {
                 setError(false);
                 setSuccessful(true);

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import {
     HashRouter as Router, Route, Routes, Link,
 } from 'react-router-dom';
@@ -12,6 +12,8 @@ import TermsOfService from './page/TermsOfService';
 import Login from './page/Login';
 import useToken from "./hook/useToken";
 import Wines from "./page/Wines";
+import {useCookies} from "react-cookie";
+import uuid from 'react-uuid';
 
 const NavBarTypography = styled(Typography)({
     flexGrow: '1',
@@ -35,7 +37,14 @@ const SingleNavLink = styled(Link)({
 });
 
 export default function App() {
+    const [cookies, setCookie] = useCookies(['rackd-cookie-id']);
     const {setToken} = useToken();
+
+    useEffect(() => {
+        if (!cookies["rackd-cookie-id"]) {
+            setCookie('rackd-cookie-id', uuid())
+        }
+    }, []);
 
     const Layout = () => (
         <AppBar position="static" color="primary">
