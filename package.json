@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack serve",
-    "start": "webpack --progress && node server.js",
+    "start": "node server.js",
     "heroku-postbuild": "webpack --config ./webpack.config.js --progress",
     "build": "webpack --config ./webpack.config.js",
     "test": "jest",
