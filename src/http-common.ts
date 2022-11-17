@@ -12,14 +12,16 @@ interface CSRFTokenResponse {
 export function post(path: string, data: any): AxiosPromise {
     return axios.get(`${baseApiUrl}/csrf`)
         .then((tokenResp: AxiosResponse<CSRFTokenResponse>) => {
-            console.log(JSON.stringify(tokenResp.data.token))
             const config = {
                 headers: {
-                    'X-CSRF-TOKEN': tokenResp.data.token,
+                    'X-XSRF-TOKEN': tokenResp.data.token,
                     'Content-Type': "application/json",
+                    'Authorization': "Bearer " + localStorage.getItem("token") ?? "",
+                    "Access-Control-Allow-Origin": "*"
                 },
 
             };
+            console.log(JSON.stringify(config))
             return axios.post(`${baseApiUrl}${path}`, JSON.stringify(data), config);
         })
 }

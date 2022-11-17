@@ -18,10 +18,16 @@ const InvalidCredentials = styled.p`
   color: red;
 `;
 
+const SuccessMessage = styled.p`
+  display: flex;
+  color: green;
+`;
+
 const LoginWrapper = ({ setToken }: Props) => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [isError, setError] = useState<boolean>(false);
+  const [isSuccessful, setSuccessful] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,17 +38,20 @@ const LoginWrapper = ({ setToken }: Props) => {
     await loginUser(credentials)
       .then((response: LoginResponse) => {
         setError(false);
+        setSuccessful(true);
         setToken(response.token);
       })
       .catch((err: AxiosError) => {
         console.log(err.message);
         setError(true);
+        setSuccessful(false);
       });
   };
   return (
         <Layout>
             <h2>Please Log In</h2>
             {isError && <InvalidCredentials>Credentials are invalid. Please enter correct credentials</InvalidCredentials>}
+            {isSuccessful && <SuccessMessage>Successfully logged in!</SuccessMessage>}
             <form onSubmit={handleSubmit}>
                 <label>
                     <p>Email</p>
