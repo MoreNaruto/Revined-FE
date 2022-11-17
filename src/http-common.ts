@@ -10,18 +10,13 @@ interface CSRFTokenResponse {
 
 // Add CSRF for all endpoint: https://devdojo.com/ketonemaniac/doing-spring-securitys-csrf-tokens-the-right-way-with-react
 export function post(path: string, data: any): AxiosPromise {
-    return axios.get(`${baseApiUrl}/csrf`, {
-        headers: {
-            'Access-Control-Allow-Origin': "*"
-        }
-    })
+    return axios.get(`${baseApiUrl}/csrf`)
         .then((tokenResp: AxiosResponse<CSRFTokenResponse>) => {
             const config = {
                 headers: {
                     'X-XSRF-TOKEN': tokenResp.data.token,
                     'Content-Type': "application/json",
                     'Authorization': "Bearer " + localStorage.getItem("token") ?? "",
-                    'Access-Control-Allow-Origin': "*"
                 },
 
             };
