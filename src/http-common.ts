@@ -10,7 +10,11 @@ interface CSRFTokenResponse {
 
 // Add CSRF for all endpoint: https://devdojo.com/ketonemaniac/doing-spring-securitys-csrf-tokens-the-right-way-with-react
 export function post(path: string, data: any, cookie: string): AxiosPromise {
-    return axios.get(`${baseApiUrl}/csrf`)
+    return axios.get(`${baseApiUrl}/csrf`, {
+        headers: {
+            'User-Rackd-Cookie': cookie
+        }
+    })
         .then((tokenResp: AxiosResponse<CSRFTokenResponse>) => {
             const config = {
                 headers: {

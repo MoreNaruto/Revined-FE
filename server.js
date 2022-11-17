@@ -1,10 +1,19 @@
 const express = require('express');
 const path = require('path');
+var http = require('http');
+var request = require('request');
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.set('port', process.env.PORT || 3000);
 
-const server = app.listen(app.get('port'), function() {
-    console.log('listening on port ', server.address().port);
-});
+http.createServer(function (req, res) {
+    if(req.url.match(/path=(.*)/)) {
+        res.setHeader("access-control-allow-origin", "*");
+        request.get(req.url.match(/path=(.*)/)[1]).pipe(res);
+    }else{
+        res.statusCode = 404;
+
+        res.end("More info at https://github.com/cDima/cors");
+    }
+}).listen(process.env.PORT || 3000);
