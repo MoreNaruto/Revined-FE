@@ -9,7 +9,6 @@
   "scripts": {
     "dev": "webpack serve",
     "start": "webpack --progress && node server.js",
-    "heroku-prebuild": "npm install --dev",
     "heroku-postbuild": "webpack --config ./webpack.config.js --progress",
     "build": "webpack --config ./webpack.config.js",
     "test": "jest",
