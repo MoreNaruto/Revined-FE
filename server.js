@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
-var http = require('http');
-var request = require('request');
+const http = require('http');
+const request = require('request');
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'dist')));
