@@ -12,7 +12,6 @@ interface CSRFTokenResponse {
 axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token") ?? "";
 axios.defaults.headers.common['Content-Type'] = "application/json";
 axios.defaults.headers.common['Accept'] = "application/json";
-axios.defaults.headers.common['Origin'] = environment == "local" ? "http://localhost:8080" : "https://www.rackd.io";
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
 
 // Add CSRF for all endpoint: https://devdojo.com/ketonemaniac/doing-spring-securitys-csrf-tokens-the-right-way-with-react
