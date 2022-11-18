@@ -5,20 +5,11 @@ const { createProxyMiddleware }= require('http-proxy-middleware');
 
 const baseApiUrl = process.env.BASE_API_URL;
 
-let options = {
-    target: baseApiUrl,
-    changeOrigin: true,
-    logLevel: "debug",
-    onError: function onError(err, req, res) {
-        console.log("Something went wrong with the proxy middleware.", err);
-        res.end();
-    }
-};
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(
-    '/',
+    '/api',
     createProxyMiddleware({
-        target: "https://re10shon-backend.herokuapp.com/",
+        target: "https://re10shon-backend.herokuapp.com",
         changeOrigin: true,
         logLevel: "debug",
         onError: function onError(err, req, res) {
