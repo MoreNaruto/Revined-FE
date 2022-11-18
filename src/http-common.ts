@@ -16,11 +16,7 @@ axios.defaults.headers.common['Access-Control-Max-Age'] = 600;
 
 // Add CSRF for all endpoint: https://devdojo.com/ketonemaniac/doing-spring-securitys-csrf-tokens-the-right-way-with-react
 export function post(path: string, data: any, cookie: string): AxiosPromise {
-    return axios.get(`${baseApiUrl}/csrf`, {
-        headers: {
-            'Content-Type': "application/x-www-form-urlencoded"
-        }
-    })
+    return axios.get(`${baseApiUrl}/csrf`)
         .then((tokenResp: AxiosResponse<CSRFTokenResponse>) => {
             const config = {
                 headers: {
