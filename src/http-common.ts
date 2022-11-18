@@ -1,15 +1,12 @@
 import axios, {AxiosPromise, AxiosResponse} from 'axios';
 
 const baseApiUrl = process.env.BASE_API_URL;
-const environment = process.env.NODE_ENV;
 
 interface CSRFTokenResponse {
     token: string
     parameterName: string
     headerName: string
 }
-
-axios.defaults.headers.common['Access-Control-Max-Age'] = 600;
 
 // Add CSRF for all endpoint: https://devdojo.com/ketonemaniac/doing-spring-securitys-csrf-tokens-the-right-way-with-react
 export function post(path: string, data: any, cookie: string): AxiosPromise {
