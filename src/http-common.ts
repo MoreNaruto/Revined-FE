@@ -12,6 +12,7 @@ interface CSRFTokenResponse {
 axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem("token") ?? "";
 axios.defaults.headers.common['Accept'] = "application/json";
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
+axios.defaults.headers.common['Access-Control-Max-Age'] = 600;
 
 // Add CSRF for all endpoint: https://devdojo.com/ketonemaniac/doing-spring-securitys-csrf-tokens-the-right-way-with-react
 export function post(path: string, data: any, cookie: string): AxiosPromise {
