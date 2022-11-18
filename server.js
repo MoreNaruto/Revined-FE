@@ -7,7 +7,7 @@ const baseApiUrl = process.env.BASE_API_URL;
 
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(
-    '/api',
+    '/csrf',
     createProxyMiddleware({
         target: "https://re10shon-backend.herokuapp.com",
         onProxyRes: function (proxyRes, req, res) {
