@@ -10,6 +10,9 @@ app.use(
     '/api',
     createProxyMiddleware({
         target: "https://re10shon-backend.herokuapp.com",
+        onProxyRes: function (proxyRes, req, res) {
+            proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+        },
         changeOrigin: true,
         logLevel: "debug",
         onError: function onError(err, req, res) {
