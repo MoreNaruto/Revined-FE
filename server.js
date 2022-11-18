@@ -1,22 +1,20 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const cors = require('cors');
-const { createProxyMiddleware }= require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const baseApiUrl = process.env.BASE_API_URL;
 
 app.use(express.static(path.join(__dirname, 'dist')));
-app.use(cors())
 app.use(
-    '/csrf',
+    '/',
     createProxyMiddleware({
-        target: "https://re10shon-backend.herokuapp.com",
+        target: "https://re10shon-backend.herokuapp.com/",
+        // target: "http://127.0.0.1:8083/",
         changeOrigin: true,
         logLevel: "debug",
-        onError: function onError(err, req, res) {
-            console.log("Something went wrong with the proxy middleware.", err);
-            res.end();
+        headers: {
+            "Connection": "keep-alive"
         }
     })
 )

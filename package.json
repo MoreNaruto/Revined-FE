@@ -6,7 +6,6 @@
   "repository": "git@github.com:MoreNaruto/Revined-FE.git",
   "author": "Thomas Morris <morenaruto007@gmail.com>",
   "license": "MIT",
-  "proxy": "https://re10shon-backend.herokuapp.com",
   "scripts": {
     "dev": "webpack serve",
     "start": "node server.js",
