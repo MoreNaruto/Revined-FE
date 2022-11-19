@@ -14,14 +14,17 @@ export function post(path: string, data: any, cookie: string): AxiosPromise {
         }
     })
         .then((tokenResp: AxiosResponse<CSRFTokenResponse>) => {
-            const config = {
-                headers: {
-                    'Content-Type': "application/json",
-                    'X-XSRF-TOKEN': tokenResp.data.token,
-                    'User-Rackd-Cookie': cookie,
-                    'Authorization': "Bearer " + localStorage.getItem("token") ?? ""
-                },
+            const headers = {
+                'Content-Type': "application/json",
+                'X-XSRF-TOKEN': tokenResp.data.token,
+                'User-Rackd-Cookie': cookie,
+            };
 
+            if (localStorage.getItem("token")) {
+                Object.assign(headers, {'Authorization': "Bearer " + localStorage.getItem("token")})
+            }
+            const config = {
+                headers: headers
             };
             return axios.post(`${path}`, JSON.stringify(data), config);
         })
