@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(
     '/',
     createProxyMiddleware({
-        target: "https://re10shon-backend.herokuapp.com/",
+        target: "https://revined-be.herokuapp.com",
         // target: "http://127.0.0.1:8083/",
         changeOrigin: true,
         logLevel: "debug",
