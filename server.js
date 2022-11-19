@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
+require('dotenv').config()
 
 const baseApiUrl = process.env.BASE_API_URL;
 
@@ -9,8 +10,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(
     '/',
     createProxyMiddleware({
-        target: "https://revined-be.herokuapp.com",
-        // target: "http://127.0.0.1:8083/",
+        target: baseApiUrl ?? "https://revined-be.herokuapp.com",
         changeOrigin: true,
         logLevel: "debug",
         headers: {

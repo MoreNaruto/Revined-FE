@@ -1,7 +1,5 @@
 import axios, {AxiosPromise, AxiosResponse} from 'axios';
 
-const baseApiUrl = process.env.BASE_API_URL;
-
 interface CSRFTokenResponse {
     token: string
     parameterName: string
@@ -10,7 +8,11 @@ interface CSRFTokenResponse {
 
 // Add CSRF for all endpoint: https://devdojo.com/ketonemaniac/doing-spring-securitys-csrf-tokens-the-right-way-with-react
 export function post(path: string, data: any, cookie: string): AxiosPromise {
-    return axios.get(`/csrf`)
+    return axios.get(`/csrf`, {
+        headers: {
+            'User-Rackd-Cookie': cookie
+        }
+    })
         .then((tokenResp: AxiosResponse<CSRFTokenResponse>) => {
             const config = {
                 headers: {
@@ -21,6 +23,6 @@ export function post(path: string, data: any, cookie: string): AxiosPromise {
                 },
 
             };
-            return axios.post(`${baseApiUrl}${path}`, JSON.stringify(data), config);
+            return axios.post(`${path}`, JSON.stringify(data), config);
         })
 }
