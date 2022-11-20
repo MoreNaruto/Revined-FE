@@ -57,7 +57,7 @@ const WineTable = () => {
         {id: 'subRegion', label: 'Sub-Region Origin of Wine', minWidth: 200, align: 'center'},
         {id: 'farmingPractices', label: 'Farming Practices to Produce Wine', minWidth: 200, align: 'center'},
         {id: 'body', label: 'Body of Wine', minWidth: 200, align: 'center'},
-        {id: 'photoLink', label: 'Body of Wine', minWidth: 200, align: 'center'},
+        {id: 'photoLink', label: 'Photo Link', minWidth: 200, align: 'center'},
         {
             id: 'foodPairing',
             label: 'Foods to Pair with Wine',
