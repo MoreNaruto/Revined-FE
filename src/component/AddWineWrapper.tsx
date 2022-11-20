@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 import React, {useState} from 'react';
-import {Credentials, LoginResponse, loginUser} from "../api/login";
 import {AxiosError} from "axios";
 import {FormControl, InputLabel, NativeSelect} from "@mui/material";
-import {addWine, WineRequest} from "../api/wine";
+import {addWine, Wine} from "../api/wine";
 import useToken from "../hook/useToken";
 import {useCookies} from "react-cookie";
 
@@ -23,7 +22,7 @@ const SuccessMessage = styled.p`
   color: green;
 `;
 
-const MultipleWineWrapper = () => {
+const AddWineWrapper = () => {
     const [name, setName] = useState<string>();
     const [description, setDescription] = useState<string>();
     const [alohaCode, setAlohaCode] = useState<string>();
@@ -47,7 +46,7 @@ const MultipleWineWrapper = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const wineRequest: WineRequest = {
+        const wineRequest: Wine = {
             name: name ?? "",
             description: description ?? "",
             alohaCode: alohaCode ?? "",
@@ -190,4 +189,4 @@ const MultipleWineWrapper = () => {
     );
 };
 
-export default MultipleWineWrapper;
+export default AddWineWrapper;

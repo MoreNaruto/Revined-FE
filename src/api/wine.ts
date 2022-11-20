@@ -1,6 +1,8 @@
-import {post} from "../http-common";
+import {post, get} from "../http-common";
+import {AxiosResponse} from "axios";
 
-export interface WineRequest {
+export interface Wine {
+    uuid?: string
     name: string
     description: string
     alohaCode: string
@@ -19,6 +21,17 @@ export interface WineRequest {
     foodPairing: string[]
 }
 
-export async function addWine(req: WineRequest, cookie: string): Promise<any> {
+export async function addWine(req: Wine, cookie: string): Promise<any> {
     return post("/wine/add", req, cookie)
+}
+
+export async function getAllWines(cookie: string): Promise<Wine[]> {
+    return get("/wine/all", cookie)
+        .then((resp: AxiosResponse<Wine[]>) => {
+           return resp.data
+        });
+}
+
+export async function deleteWine(wineId: string, cookie: string): Promise<any> {
+    return get(`/wine/delete/${wineId}`, cookie)
 }
