@@ -123,9 +123,20 @@ const WineTable = () => {
                                                 {columns.map((column) => {
                                                     const id = column.id as keyof typeof wine;
                                                     const value = wine[id];
+                                                    if (id == "photoLink") {
+                                                       return( <TableCell key={id} align={column.align}>
+                                                            <img
+                                                                src={`${value as string}?w=164&h=164&fit=crop&auto=format`}
+                                                                alt={value as string}
+                                                                loading="lazy"
+                                                            />
+                                                        </TableCell>
+                                                       )
+                                                    }
                                                     return (
                                                         <TableCell key={id} align={column.align}>
-                                                            {column.format && Array.isArray(value)
+                                                            {
+                                                                column.format && Array.isArray(value)
                                                                 ? column.format(value)
                                                                 : value}
                                                         </TableCell>
