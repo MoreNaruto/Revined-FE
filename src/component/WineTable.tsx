@@ -126,7 +126,7 @@ const WineTable = () => {
                                                     if (id == "photoLink") {
                                                        return( <TableCell key={id} align={column.align}>
                                                             <img
-                                                                src={`${value as string}?w=164&h=164&fit=crop&auto=format`}
+                                                                src={`${value as string}?w=50&h=50&fit=crop&auto=format`}
                                                                 alt={value as string}
                                                                 loading="lazy"
                                                             />
