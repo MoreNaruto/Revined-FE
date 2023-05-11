@@ -13,7 +13,5 @@ export interface LoginResponse {
 
 export async function loginUser(credentials: Credentials, cookie: string): Promise<LoginResponse> {
   return post('/authenticate', credentials, cookie)
-    .then((res: AxiosResponse<LoginResponse>) => {
-        return res.data
-    });
+    .then((res: AxiosResponse<LoginResponse>) => res.data);
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import AddWineWrapper from "../component/AddWineWrapper";
-import WineTable from "../component/WineTable";
+import AddWineWrapper from '../component/AddWineWrapper';
+import WineTable from '../component/WineTable';
 
 const Wines: React.FunctionComponent = () => (
     <div>

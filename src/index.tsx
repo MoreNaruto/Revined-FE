@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
+import { CookiesProvider } from 'react-cookie';
 import App from './App';
-import {CookiesProvider} from "react-cookie";
 
 const root = ReactDOM.createRoot(document.getElementById('app-root') as HTMLElement);
 root.render(
@@ -9,5 +9,5 @@ root.render(
         <CookiesProvider>
             <App/>
         </CookiesProvider>
-    </React.StrictMode>
+    </React.StrictMode>,
 );

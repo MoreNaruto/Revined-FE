@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import React, {useState} from 'react';
-import {AxiosError} from "axios";
-import {FormControl, InputLabel, NativeSelect} from "@mui/material";
-import {addWine, Wine} from "../api/wine";
-import useToken from "../hook/useToken";
-import {useCookies} from "react-cookie";
+import React, { useState } from 'react';
+import { AxiosError } from 'axios';
+import { FormControl, InputLabel, NativeSelect } from '@mui/material';
+import { useCookies } from 'react-cookie';
+import { addWine, Wine } from '../api/wine';
+import useToken from '../hook/useToken';
 
 const Layout = styled.div`
   display: flex;
@@ -23,81 +23,79 @@ const SuccessMessage = styled.p`
 `;
 
 const AddWineWrapper = () => {
-    const [name, setName] = useState<string>();
-    const [description, setDescription] = useState<string>();
-    const [alohaCode, setAlohaCode] = useState<string>();
-    const [color, setColor] = useState<string>();
-    const [producer, setProducer] = useState<string>();
-    const [vintage, setVintage] = useState<string>();
-    const [grapes, setGrapes] = useState<string[]>();
-    const [aromas, setAromas] = useState<string[]>();
-    const [effervescence, setEffervescence] = useState<string>();
-    const [country, setCountry] = useState<string>();
-    const [region, setRegion] = useState<string>();
-    const [subRegion, setSubRegion] = useState<string>();
-    const [farmingPractices, setFarmingPractices] = useState<string>();
-    const [body, setBody] = useState<string>();
-    const [photoLink, setPhotoLink] = useState<string>();
-    const [foodPairing, setFoodPairing] = useState<string[]>();
-    const [isError, setError] = useState<boolean>(false);
-    const [isSuccessful, setSuccessful] = useState<boolean>(false);
-    const {token} = useToken();
-    const [cookies] = useCookies(['rackd-cookie-id']);
+  const [name, setName] = useState<string>();
+  const [description, setDescription] = useState<string>();
+  const [alohaCode, setAlohaCode] = useState<string>();
+  const [color, setColor] = useState<string>();
+  const [producer, setProducer] = useState<string>();
+  const [vintage, setVintage] = useState<string>();
+  const [grapes, setGrapes] = useState<string[]>();
+  const [aromas, setAromas] = useState<string[]>();
+  const [effervescence, setEffervescence] = useState<string>();
+  const [country, setCountry] = useState<string>();
+  const [region, setRegion] = useState<string>();
+  const [subRegion, setSubRegion] = useState<string>();
+  const [farmingPractices, setFarmingPractices] = useState<string>();
+  const [body, setBody] = useState<string>();
+  const [photoLink, setPhotoLink] = useState<string>();
+  const [foodPairing, setFoodPairing] = useState<string[]>();
+  const [isError, setError] = useState<boolean>(false);
+  const [isSuccessful, setSuccessful] = useState<boolean>(false);
+  const { token } = useToken();
+  const [cookies] = useCookies(['rackd-cookie-id']);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const wineRequest: Wine = {
-            name: name ?? "",
-            description: description ?? "",
-            alohaCode: alohaCode ?? "",
-            color: color ?? "",
-            producer: producer ?? "",
-            vintage: vintage ?? "",
-            grapes: grapes ?? [],
-            aromas: aromas ?? [],
-            effervescence: effervescence ?? "",
-            country: country ?? "",
-            region: region ?? "",
-            subRegion: subRegion ?? "",
-            farmingPractices: farmingPractices ?? "",
-            body: body ?? "",
-            photoLink: photoLink ?? "",
-            foodPairing: foodPairing ?? []
-        };
-
-        await addWine(wineRequest, cookies["rackd-cookie-id"])
-            .then(_ => {
-                setError(false);
-                setSuccessful(true);
-            }).catch((err: AxiosError) => {
-                console.log(err.message);
-                setError(true);
-                setSuccessful(false);
-            })
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const wineRequest: Wine = {
+      name: name ?? '',
+      description: description ?? '',
+      alohaCode: alohaCode ?? '',
+      color: color ?? '',
+      producer: producer ?? '',
+      vintage: vintage ?? '',
+      grapes: grapes ?? [],
+      aromas: aromas ?? [],
+      effervescence: effervescence ?? '',
+      country: country ?? '',
+      region: region ?? '',
+      subRegion: subRegion ?? '',
+      farmingPractices: farmingPractices ?? '',
+      body: body ?? '',
+      photoLink: photoLink ?? '',
+      foodPairing: foodPairing ?? [],
     };
 
-    const getYear = (): number[] => {
-        const minOffset: number = 0;
-        const maxOffset: number = 200;
-        const thisYear: number = (new Date()).getFullYear();
-        const years: number[] = [];
+    await addWine(wineRequest, cookies['rackd-cookie-id'])
+      .then((_) => {
+        setError(false);
+        setSuccessful(true);
+      }).catch((err: AxiosError) => {
+        console.log(err.message);
+        setError(true);
+        setSuccessful(false);
+      });
+  };
 
-        for (let i = minOffset; i <= maxOffset; i++) {
-            years.push(thisYear - i);
-        }
+  const getYear = (): number[] => {
+    const minOffset = 0;
+    const maxOffset = 200;
+    const thisYear: number = (new Date()).getFullYear();
+    const years: number[] = [];
 
-        return years
+    for (let i = minOffset; i <= maxOffset; i++) {
+      years.push(thisYear - i);
     }
 
-    const getArrayOfStringsByNextLine = (value: string): string[] => {
-        return value.split("\n");
-    }
+    return years;
+  };
 
-    return (
+  const getArrayOfStringsByNextLine = (value: string): string[] => value.split('\n');
+
+  return (
         <Layout>
             {!token && <p>Please login in order to add a new wine</p>}
-            {token &&
-            <div>
+            {token
+            && <div>
                 <h2>Add new wine</h2>
                 {isError && <MissingFields>The fields name, producer, and year needs to be populated</MissingFields>}
                 {isSuccessful && <SuccessMessage>Successfully added new wine!</SuccessMessage>}
@@ -121,14 +119,12 @@ const AddWineWrapper = () => {
                         <NativeSelect
                             defaultValue={2022}
                             inputProps={{
-                                name: 'year',
-                                id: 'wine-year-dropdown',
+                              name: 'year',
+                              id: 'wine-year-dropdown',
                             }}
                             onChange={(e) => setVintage(e.target.value)}
                         >
-                            {getYear().map((year: number, index: number) => {
-                                return (<option key={`${year}-${index}`} value={year}>{year}</option>)
-                            })}
+                            {getYear().map((year: number, index: number) => (<option key={`${year}-${index}`} value={year}>{year}</option>))}
                         </NativeSelect>
                     </FormControl>
                     <label>
@@ -186,7 +182,7 @@ const AddWineWrapper = () => {
             </div>
             }
         </Layout>
-    );
+  );
 };
 
 export default AddWineWrapper;

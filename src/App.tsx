@@ -1,23 +1,23 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
-    HashRouter as Router, Route, Routes, Link,
+  HashRouter as Router, Route, Routes, Link,
 } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import styled from '@emotion/styled';
+import { useCookies } from 'react-cookie';
+import uuid from 'react-uuid';
 import Home from './page/Home';
 import TermsOfService from './page/TermsOfService';
 import Login from './page/Login';
-import useToken from "./hook/useToken";
-import Wines from "./page/Wines";
-import {useCookies} from "react-cookie";
-import uuid from 'react-uuid';
+import useToken from './hook/useToken';
+import Wines from './page/Wines';
 
 const NavBarTypography = styled(Typography)({
-    flexGrow: '1',
-    cursor: 'pointer',
+  flexGrow: '1',
+  cursor: 'pointer',
 });
 
 const NavLinks = styled.div`
@@ -26,27 +26,27 @@ const NavLinks = styled.div`
 `;
 
 const SingleNavLink = styled(Link)({
-    textDecoration: 'none',
-    color: 'white',
-    fontSize: '20px',
-    marginLeft: '4em',
-    '&:hover': {
-        color: 'black',
-        borderBottom: '1px solid black',
-    },
+  textDecoration: 'none',
+  color: 'white',
+  fontSize: '20px',
+  marginLeft: '4em',
+  '&:hover': {
+    color: 'black',
+    borderBottom: '1px solid black',
+  },
 });
 
 export default function App() {
-    const [cookies, setCookie] = useCookies(['rackd-cookie-id']);
-    const {setToken} = useToken();
+  const [cookies, setCookie] = useCookies(['rackd-cookie-id']);
+  const { setToken } = useToken();
 
-    useEffect(() => {
-        if (!cookies["rackd-cookie-id"]) {
-            setCookie('rackd-cookie-id', uuid())
-        }
-    }, []);
+  useEffect(() => {
+    if (!cookies['rackd-cookie-id']) {
+      setCookie('rackd-cookie-id', uuid());
+    }
+  }, []);
 
-    const Layout = () => (
+  const Layout = () => (
         <AppBar position="static" color="primary">
             <CssBaseline/>
             <Toolbar>
@@ -61,9 +61,9 @@ export default function App() {
                 </NavLinks>
             </Toolbar>
         </AppBar>
-    );
+  );
 
-    return (
+  return (
         <div>
             <Router>
                 <Layout/>
@@ -75,5 +75,5 @@ export default function App() {
                 </Routes>
             </Router>
         </div>
-    );
+  );
 }
